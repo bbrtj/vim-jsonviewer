@@ -9,6 +9,8 @@ syn region viewerString start='`' end='`$'
 syn keyword viewerTrue true
 syn keyword viewerFalse false
 syn keyword viewerNull null
+syn keyword viewerObject Object
+syn keyword viewerArray Array
 
 syn match viewerNumber "\(\s\|^\)\@<=[0-9]\+\(\.[0-9]\+\)\?\(\s\|$\)\@="
 syn match viewerIndex '^\s*.\+:'
@@ -20,6 +22,8 @@ hi link viewerString String
 hi link viewerTrue Constant
 hi link viewerFalse Constant
 hi link viewerNull Constant
+hi link viewerObject Keyword
+hi link viewerArray Keyword
 hi! link Folded Special
 
 " Syntax folding not working properly - need a match in a line before the fold
