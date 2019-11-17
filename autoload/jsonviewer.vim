@@ -35,12 +35,13 @@ function! jsonviewer#prettyPrint(label, data, level)
 			call add(content, line . name . " (" . len(loopdata) . ") " . jsonviewer#folding#foldstart_mark() . bounds[0])
 			if jsonviewer#isOptimized() && a:level >= 1
 				let current = len(b:references)
-				call extend(b:references, deepcopy(loopdata))
-				call extend(content, map(loopdata, {i, val -> indent . "\t###" . (current + i) . ": ..."}))
+				call extend(b:references, loopdata)
+				call extend(content, map(copy(loopdata), {i, val -> indent . "\t###" . (current + i) . ": ..."}))
 			else
 				for [ind, value] in loopdata
 					call extend(content, jsonviewer#prettyPrint(ind, value, a:level + 1))
 				endfor
+				unlet loopdata
 			endif
 			call add(content, indent . jsonviewer#folding#foldend_mark() . bounds[1])
 		endif
@@ -70,6 +71,7 @@ function! jsonviewer#init()
 		let json = s:getBufferJson(orig_buffer)
 		let b:references = []
 		let lines = jsonviewer#prettyPrint("root", json, 0)
+		unlet json
 		call append(0, lines)
 		setlocal filetype=jsonviewer
 		normal gg

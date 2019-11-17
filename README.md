@@ -24,7 +24,7 @@ Jsonviewer introduces just a couple of keymaps, only available in jsonviewer buf
 
 ### Configuration
 
-* `g:jsonviewer_optimize` - holds optimization threshold - a number of bytes that, after being exceeded by json data, sets jsonviewer optimization flag. Defaults to 500000 (500 kB). Set to 0 to always optimize.
+* `g:jsonviewer_optimize` - holds optimization threshold - a number of bytes that, after being exceeded by json data, sets jsonviewer optimization flag. While optimized, elements will only be loaded two levels down. This helps a lot with Vim responsiveness but makes some tasks impossible, like recursive fold opening and searching. Defaults to 500000 (500 kB). Set to 0 to always optimize.
 
 ### Functions
 
@@ -32,7 +32,7 @@ Jsonviewer introduces just a couple of keymaps, only available in jsonviewer buf
 
 ### File sizes and optimization
 
-The main feature of this plugin is its ability to load json content lazily, which greatly reduces the amount of lag in large files. In my tests, the plugin was able to load a file with 100 MB of JSON, consuming 3 GB of RAM. The amount of memory consumed is increasing rapidly with very large files.
+The main feature of this plugin is its ability to load json content lazily, which greatly reduces the amount of lag in large files. In my tests on an Intel i5 laptop, the plugin was able to load a file with 100 MB of JSON in 6 seconds, consuming roughly 1.7 GB of RAM. While there's no theoretical limit to the size of a file loaded (other than Vim limits), the amount of memory consumed is increasing rapidly with very large files.
 
 ### TODO
 
