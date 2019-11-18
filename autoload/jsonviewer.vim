@@ -46,7 +46,8 @@ function! jsonviewer#prettyPrint(label, data, level)
 			call add(content, indent . jsonviewer#folding#foldend_mark() . bounds[1])
 		endif
 	elseif vtype ==# v:t_string
-		call add(content, line . "`" . a:data . "`")
+		let str = substitute(json_encode(a:data), '\\"', '"', "g")
+		call add(content, line . substitute(str, '^"\|"$', '`', "g"))
 	elseif vtype ==# v:t_number
 		call add(content, line . a:data)
 	elseif vtype ==# v:t_float

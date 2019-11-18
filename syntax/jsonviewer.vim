@@ -4,8 +4,6 @@ elseif exists("b:current_syntax")
 	finish
 endif
 
-syn region viewerString start='`' end='`$'
-
 syn keyword viewerTrue true
 syn keyword viewerFalse false
 syn keyword viewerNull null
@@ -13,8 +11,10 @@ syn keyword viewerObject Object
 syn keyword viewerArray Array
 
 syn match viewerNumber "\(\s\|^\)\@<=[0-9]\+\(\.[0-9]\+\)\?\(\s\|$\)\@="
-syn match viewerIndex '^\s*.\+:'
-syn match viewerFoldMark '{{{!!\|!!}}}' conceal
+syn match viewerString '\(: \)\@<=`.*`$'
+syn match viewerIndex '^\s*.\{-}: \([0-9]\|null\|false\|true\|Object\|Array\|`\)\@='
+syn match viewerFoldMarkStart '{{{!!' conceal
+syn match viewerFoldMarkEnd '!!}}}' conceal
 
 hi link viewerIndex Function
 hi link viewerNumber Number

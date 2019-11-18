@@ -11,6 +11,7 @@ setlocal concealcursor=nvic
 setlocal foldlevel=1
 setlocal foldopen=search
 setlocal foldmarker={{{!!,!!}}}
+setlocal nowrap
 
 noremap <buffer> <silent> o :call jsonviewer#lazyload#openFold(line("."))<CR>
 noremap <buffer> <silent> <CR> :call jsonviewer#lazyload#openFold(line("."))<CR>
