@@ -54,7 +54,7 @@ function! jsonviewer#prettyPrint(label, data, level)
 		call add(content, line . string(a:data))
 	elseif vtype ==# v:t_bool
 		call add(content, line . (a:data ==# v:true ? "true" : "false"))
-	elseif vtype ==# v:t_none
+	elseif a:data is v:null
 		call add(content, line . "null")
 	else
 		throw "Error: incorrect datatype in json"
